@@ -11,6 +11,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Cache node_modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          # only caches if package-lock.json dependancies change and checks for os
+          key: ${{ runner.os }}=node-${{ hashFiles('**/package-lock.json') }}
+          # look for cached key. If none, create one from above
+          restore-key: |
+            ${{ runner.os }}=node-
       - name: Use NodeJs Version
         uses: actions/setup-node@v1
         with:

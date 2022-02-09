@@ -18,7 +18,7 @@ jobs:
           # only caches if package-lock.json dependancies change and checks for os
           key: ${{ runner.os }}=node-${{ hashFiles('**/package-lock.json') }}
           # look for cached key. If none, create one from above
-          restore-key: |
+          restore-keys: |
             ${{ runner.os }}=node-
       - name: Use NodeJs Version
         uses: actions/setup-node@v1
